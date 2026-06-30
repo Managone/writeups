@@ -1,0 +1,123 @@
+site_name: Writeups Cyber en Français
+site_description: Collection de writeups TryHackMe, HackTheBox et autres CTF
+site_author: Managone
+site_url: https://managone.github.io/writeups/
+
+# Repository
+repo_name: managone/writeups
+repo_url: https://github.com/managone/writeups
+
+# Theme
+theme:
+  name: material
+  language: fr
+  logo: assets/logo_perso.png
+  favicon: assets/logo_perso.png
+  palette:
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Passer en mode clair
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Passer en mode sombre
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
+
+# Extensions Markdown
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+# Plugins
+plugins:
+  - search:
+      lang: fr
+  - tags:
+      tags_file: tags.md
+
+# Navigation
+nav:
+  - Accueil: index.md
+  - TryHackMe:
+    - tryhackme/index.md
+    - RootMe: tryhackme/rootme.md
+    - Simple CTF: tryhackme/simplectf.md
+    - OhSINT: tryhackme/ohsint.md
+    - Pickle Rick : tryhackme/picklerick.md
+    - Basic Pentesting : tryhackme/basicpentesting.md 
+    - Bounty Hacker: tryhackme/bountyhacker.md
+    - Agent Sudo: tryhackme/agent-sudo.md
+    - Crack the hash: tryhackme/crack-the-hash.md
+    - LazyAdmin: tryhackme/lazyadmin.md
+    - Overpass: tryhackme/overpass.md
+    - Brooklyn Nine Nine: tryhackme/brooklyn-nine-nine.md
+    - Cyborg: tryhackme/cyborg.md
+    - Skynet: tryhackme/skynet.md
+    - Anonymous: tryhackme/anonymous.md
+    - Ignite: tryhackme/ignite.md
+    - Vulnerability Capstone: tryhackme/vulnerability-capstone.md
+    - Net Sec Challenge: tryhackme/net-sec-challenge.md
+    - Wgel CTF: tryhackme/wgel-ctf.md
+    - Tomghost: tryhackme/tomghost.md
+    - Brute It: tryhackme/brute-it.md
+    - Anthem: tryhackme/anthem.md
+    - Lian Yu: tryhackme/lian-yu.md
+    - Year of the Rabbit: tryhackme/year-of-the-rabbit.md
+    - Chill Hack: tryhackme/chill-hack.md
+    - GamingServer: tryhackme/gamingserver.md
+  - HackTheBox:
+    - hackthebox/index.md
+  - Tags: tags.md
+
+# Extra
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/managone/writeups
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/clipboard-fix.js
+
+# Copyright
+copyright: Copyright &copy; 2024-2026 - Managone
