@@ -109,8 +109,14 @@ nav:
 # Extra
 extra:
   social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/mathisg/
+      name: Mathis · LinkedIn (fondateur Odonia Cyber)
     - icon: fontawesome/brands/github
       link: https://github.com/managone/writeups
+    - icon: material/shield-lock
+      link: https://odonia.fr
+      name: Odonia Cyber · mon cabinet de cybersécurité pour les PME et ETI
   generator: false
 
 extra_css:
@@ -120,4 +126,7 @@ extra_javascript:
   - javascripts/clipboard-fix.js
 
 # Copyright
-copyright: Copyright &copy; 2024-2026 - Managone
+copyright: >
+  Copyright &copy; 2024-2026 · Managone ·
+  <a href="https://odonia.fr" target="_blank" rel="noopener">Odonia Cyber</a>,
+  cybersécurité pour les PME et ETI
