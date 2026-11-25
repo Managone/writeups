@@ -1,0 +1,2040 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Collection de writeups TryHackMe, HackTheBox et autres CTF">
+      
+      
+        <meta name="author" content="Managone">
+      
+      
+        <link rel="canonical" href="https://managone.github.io/writeups/tryhackme/lian-yu/">
+      
+      
+        <link rel="prev" href="../anthem/">
+      
+      
+        <link rel="next" href="../year-of-the-rabbit/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_perso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>Lian Yu - Writeups Cyber en Français</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lian_yu-tryhackme" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Writeups Cyber en Français" class="md-header__button md-logo" aria-label="Writeups Cyber en Français" data-md-component="logo">
+      
+  <img src="../../assets/logo_perso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Writeups Cyber en Français
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lian Yu
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/managone/writeups" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    managone/writeups
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  TryHackMe
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hackthebox/" class="md-tabs__link">
+          
+  
+  
+  HackTheBox
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Writeups Cyber en Français" class="md-nav__button md-logo" aria-label="Writeups Cyber en Français" data-md-component="logo">
+      
+  <img src="../../assets/logo_perso.png" alt="logo">
+
+    </a>
+    Writeups Cyber en Français
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/managone/writeups" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    managone/writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHackMe
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    TryHackMe
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHackMe Writeups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rootme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RootMe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simplectf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simple CTF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ohsint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OhSINT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../picklerick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pickle Rick
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basicpentesting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Pentesting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bountyhacker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bounty Hacker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-sudo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Sudo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../crack-the-hash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crack the hash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lazyadmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LazyAdmin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overpass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overpass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../brooklyn-nine-nine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brooklyn Nine Nine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cyborg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyborg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skynet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skynet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anonymous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anonymous
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ignite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ignite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vulnerability-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vulnerability Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../net-sec-challenge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Net Sec Challenge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wgel-ctf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wgel CTF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tomghost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tomghost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../brute-it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brute It
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anthem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lian Yu
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lian Yu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#informations-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Informations générales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexte-et-objectifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexte et objectifs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methodologie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodologie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Méthodologie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-cartographie-des-services-avec-nmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : Cartographie des services avec Nmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-enumeration-web-niveau-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : Enumération web - Niveau 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-enumeration-web-niveau-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : Enumération web - Niveau 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-decodage-base58-et-acces-ftp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 : Décodage Base58 et accès FTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-5-correction-de-limage-corrompue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 5 : Correction de l'image corrompue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-6-extraction-steganographique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 : Extraction stéganographique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-7-connexion-ssh-et-flag-utilisateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 7 : Connexion SSH et flag utilisateur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-8-escalade-de-privileges-via-sudo-pkexec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 8 : Escalade de privilèges via sudo pkexec
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synthese-technique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synthèse technique
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../year-of-the-rabbit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Year of the Rabbit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chill-hack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chill Hack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamingserver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GamingServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HackTheBox
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HackTheBox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackthebox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HackTheBox Writeups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#informations-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Informations générales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexte-et-objectifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexte et objectifs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methodologie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodologie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Méthodologie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-cartographie-des-services-avec-nmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : Cartographie des services avec Nmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-enumeration-web-niveau-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : Enumération web - Niveau 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-enumeration-web-niveau-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : Enumération web - Niveau 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-decodage-base58-et-acces-ftp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 : Décodage Base58 et accès FTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-5-correction-de-limage-corrompue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 5 : Correction de l'image corrompue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-6-extraction-steganographique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 : Extraction stéganographique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-7-connexion-ssh-et-flag-utilisateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 7 : Connexion SSH et flag utilisateur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-8-escalade-de-privileges-via-sudo-pkexec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 8 : Escalade de privilèges via sudo pkexec
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synthese-technique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synthèse technique
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:ftp" class="md-tag">FTP</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:facile" class="md-tag">Facile</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:gtfobins" class="md-tag">GTFOBins</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:gobuster" class="md-tag">Gobuster</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:linux" class="md-tag">Linux</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:nmap" class="md-tag">Nmap</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:steganographie" class="md-tag">Steganographie</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:tryhackme" class="md-tag">TryHackMe</a>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<h1 id="lian_yu-tryhackme">Lian_Yu - TryHackMe<a class="headerlink" href="#lian_yu-tryhackme" title="Permanent link">&para;</a></h1>
+<figure>
+<p><img alt="Lian_Yu" src="../logo/lian-yu.png" width="250" /></p>
+</figure>
+<h2 id="informations-generales">Informations générales<a class="headerlink" href="#informations-generales" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Plateforme</strong></td>
+<td>TryHackMe</td>
+</tr>
+<tr>
+<td><strong>Type</strong></td>
+<td>Offensive / Challenge</td>
+</tr>
+<tr>
+<td><strong>Difficulté</strong></td>
+<td>Facile</td>
+</tr>
+<tr>
+<td><strong>Thématiques</strong></td>
+<td>Enumération web multi-niveaux, FTP, stéganographie, GTFOBins pkexec</td>
+</tr>
+<tr>
+<td><strong>Prérequis</strong></td>
+<td>Bases Linux, HTTP, FTP, steghide, décodage Base58</td>
+</tr>
+</tbody>
+</table>
+<h2 id="contexte-et-objectifs">Contexte et objectifs<a class="headerlink" href="#contexte-et-objectifs" title="Permanent link">&para;</a></h2>
+<p>Cette room inspirée de la série Arrow propose une investigation en plusieurs niveaux d'énumération web. L'objectif est de trouver un nom d'utilisateur caché dans une page web, de découvrir un fichier ticket encodé en Base58 via Gobuster, d'utiliser le mot de passe décodé pour accéder à un serveur FTP, d'extraire des credentials SSH par stéganographie, puis d'élever ses privilèges via pkexec.</p>
+<div class="admonition info">
+<p class="admonition-title">À propos de cette room</p>
+<p>Lian_Yu est une bonne introduction à l'énumération web en profondeur : il faut enchaîner plusieurs niveaux de Gobuster, décoder un format inhabituel (Base58), et utiliser steghide sur des images.</p>
+</div>
+<h2 id="methodologie">Méthodologie<a class="headerlink" href="#methodologie" title="Permanent link">&para;</a></h2>
+<h3 id="etape-1-cartographie-des-services-avec-nmap">Étape 1 : Cartographie des services avec Nmap<a class="headerlink" href="#etape-1-cartographie-des-services-avec-nmap" title="Permanent link">&para;</a></h3>
+<p>On commence par identifier ce qui tourne sur la machine. Un scan Nmap avec détection de versions et scripts par défaut donne une vue complète des services exposés.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nmap<span class="w"> </span>-sC<span class="w"> </span>-sV<span class="w"> </span>-Pn<span class="w"> </span>&lt;IP_cible&gt;
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_khDtTyxeuZ.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_khDtTyxeuZ.png" /></a></p>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi -sC, -sV et -Pn ?</p>
+<p><code>-sV</code> détecte les versions précises de chaque service (OpenSSH 6.7p1, vsftpd 3.0.2...), ce qui permet d'identifier des versions vulnérables connues. <code>-sC</code> active les scripts NSE par défaut : ils extraient des informations supplémentaires comme les bannières, les méthodes HTTP acceptées ou les certificats TLS. <code>-Pn</code> désactive le ping préliminaire - sans ce flag, Nmap peut conclure que l'hôte est éteint si le pare-feu bloque l'ICMP, et ne scan rien du tout.</p>
+</div>
+<p>Quatre ports ouverts :
+- <strong>21/tcp</strong> : FTP (vsftpd 3.0.2)
+- <strong>22/tcp</strong> : SSH (OpenSSH 6.7p1)
+- <strong>80/tcp</strong> : HTTP (Apache)
+- <strong>111/tcp</strong> : RPC (rpcbind)</p>
+<p>La surface d'attaque prioritaire est le port 80 pour l'énumération web, et le FTP qui autorise peut-être un accès avec des credentials trouvés ailleurs.</p>
+<h3 id="etape-2-enumeration-web-niveau-1">Étape 2 : Enumération web - Niveau 1<a class="headerlink" href="#etape-2-enumeration-web-niveau-1" title="Permanent link">&para;</a></h3>
+<p>On commence par le service web, identifié comme prioritaire à l'étape précédente. La page d'accueil ne contient que du texte de présentation, rien d'exploitable directement. On ne sait pas encore quels chemins existent sur ce serveur. On lance Gobuster pour énumérer les répertoires accessibles. On utilise <code>directory-list-2.3-medium.txt</code> plutôt que <code>common.txt</code> : cette wordlist contient plus de 220 000 entrées contre quelques milliers pour <code>common.txt</code>, ce qui réduit le risque de passer à côté d'un répertoire au nom inhabituel.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>gobuster<span class="w"> </span>dir<span class="w"> </span>-u<span class="w"> </span>http://&lt;IP_cible&gt;<span class="w"> </span>-w<span class="w"> </span>/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_oPI3DfKBgq.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_oPI3DfKBgq.png" /></a></p>
+<p>Gobuster découvre un répertoire <code>/island</code>.</p>
+<p>On visite ce répertoire et on inspecte le code source (Ctrl+U) :</p>
+<p><a href="../screen/LianYu/a0yR3DS0RD.png"><img alt="Lian_Yu" src="../screen/LianYu/a0yR3DS0RD.png" /></a></p>
+<div class="admonition info">
+<p class="admonition-title">Texte invisible par CSS : une technique d'obscurcissement fragile</p>
+<p>Le mot "vigilante" est rendu invisible en HTML en lui attribuant une couleur identique au fond de la page (<code>color: white</code> sur fond blanc). Visuellement, la page paraît vide, mais le texte est bien présent dans le DOM et visible dès qu'on ouvre le code source. Cette technique ne constitue aucune protection réelle : les moteurs de recherche l'indexent, les lecteurs d'écran le lisent, et n'importe qui peut l'afficher via Ctrl+U.</p>
+</div>
+<p>On trouve le nom d'utilisateur : <strong>vigilante</strong></p>
+<h3 id="etape-3-enumeration-web-niveau-2">Étape 3 : Enumération web - Niveau 2<a class="headerlink" href="#etape-3-enumeration-web-niveau-2" title="Permanent link">&para;</a></h3>
+<p>Le nom d'utilisateur seul ne suffit pas, il manque un mot de passe. On poursuit donc l'énumération en cherchant des sous-répertoires dans <code>/island</code> avec la même wordlist :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>gobuster<span class="w"> </span>dir<span class="w"> </span>-u<span class="w"> </span>http://&lt;IP_cible&gt;/island<span class="w"> </span>-w<span class="w"> </span>/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_ATvmWP1PP3.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_ATvmWP1PP3.png" /></a></p>
+<p>Gobuster trouve le sous-répertoire <code>/2100</code>. On s'y rend et on inspecte le code source de la page :</p>
+<p><a href="../screen/LianYu/msrdc_ra0BJGX7Yi.png"><img alt="Lian_Yu" src="../screen/LianYu/msrdc_ra0BJGX7Yi.png" /></a></p>
+<p>Le code source contient un commentaire HTML : <em>"you can avail your .ticket here but how?"</em>. La mention de <code>.ticket</code> ressemble fortement à une extension de fichier, c'est l'indice qui oriente la suite. On relance Gobuster en ciblant explicitement cette extension :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>gobuster<span class="w"> </span>dir<span class="w"> </span>-u<span class="w"> </span>http://&lt;IP_cible&gt;/island/2100<span class="w"> </span>-w<span class="w"> </span>/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt<span class="w"> </span>-x<span class="w"> </span>.ticket
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi spécifier l'extension <code>-x .ticket</code> ?</p>
+<p>Par défaut, Gobuster ne teste que les chemins sans extension. L'option <code>-x</code> lui demande de tester chaque entrée de la wordlist avec l'extension ajoutée, générant des requêtes du type <code>/admin.ticket</code>, etc. Sans l'indice du code source, rien n'indiquait qu'il fallait chercher cette extension précise.</p>
+</div>
+<p><a href="../screen/LianYu/WindowsTerminal_iynLRIhT9I.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_iynLRIhT9I.png" /></a></p>
+<p>Gobuster trouve le fichier <code>/green_arrow.ticket</code>. On y accède :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>http://&lt;IP_cible&gt;/island/2100/green_arrow.ticket
+</span></code></pre></div>
+<p><a href="../screen/LianYu/msrdc_QJv9NRBnA0.png"><img alt="Lian_Yu" src="../screen/LianYu/msrdc_QJv9NRBnA0.png" /></a></p>
+<p>On y trouve une chaîne encodée : <code>RTy8yhBQdscX</code>.</p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>What is the Web Directory you found?</strong> → <code>2100</code></p>
+<p><strong>what is the file name you found?</strong> → <code>green_arrow.ticket</code></p>
+</div>
+<h3 id="etape-4-decodage-base58-et-acces-ftp">Étape 4 : Décodage Base58 et accès FTP<a class="headerlink" href="#etape-4-decodage-base58-et-acces-ftp" title="Permanent link">&para;</a></h3>
+<p>La chaîne <code>RTy8yhBQdscX</code> ressemble à du texte encodé. Pour identifier le format, on l'examine : elle ne contient ni <code>0</code> (zéro), ni <code>O</code> (o majuscule), ni <code>l</code> (L minuscule), ni <code>I</code> (i majuscule). C'est précisément l'alphabet Base58, un format reconnaissable à l'absence de ces quatre caractères ambigus. On la colle dans dcode.fr et on sélectionne "Chiffre Base 58" : si le résultat est un texte lisible, c'est confirmé.</p>
+<div class="admonition info">
+<p class="admonition-title">Qu'est-ce que l'encodage Base58 ?</p>
+<p>Base58 est une variante de Base64 qui supprime les caractères visuellement ambigus : <code>0</code>/<code>O</code> et <code>l</code>/<code>I</code> se ressemblent trop selon les polices. Il est utilisé notamment par Bitcoin pour les adresses de portefeuilles. Ce n'est pas du chiffrement, car n'importe qui peut décoder une chaîne Base58 instantanément avec un outil en ligne.</p>
+</div>
+<p><a href="../screen/LianYu/GHtDPAXoSW.png"><img alt="Lian_Yu" src="../screen/LianYu/GHtDPAXoSW.png" /></a></p>
+<p>Le mot de passe obtenu est : <strong>!#th3h00d</strong></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>what is the FTP Password?</strong> → <code>!#th3h00d</code></p>
+</div>
+<p>On a maintenant deux éléments en main :
+- Un <strong>nom d'utilisateur</strong> : <code>vigilante</code>, trouvé en texte invisible sur la page <code>/island</code> à l'étape 2
+- Un <strong>mot de passe</strong> : <code>!#th3h00d</code>, décodé depuis le fichier ticket</p>
+<p>Le port 21 (FTP) était ouvert d'après le scan Nmap de l'étape 1. FTP est le premier service à tester avec des credentials trouvés sur un site web. On tente alors de s'y connecter.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ftp<span class="w"> </span>&lt;IP_cible&gt;
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># Username: vigilante</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Password: !#th3h00d</span>
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_k9lS0t7HqP.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_k9lS0t7HqP.png" /></a></p>
+<p>La connexion réussit. On liste le contenu du répertoire pour savoir ce qui est disponible :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ls<span class="w"> </span>-la
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_a7WHTVHmes.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_a7WHTVHmes.png" /></a></p>
+<p>Le listing révèle trois images (<code>Leave_me_alone.png</code>, <code>aa.jpg</code>, <code>Queen's_Gambit.png</code>) et un fichier caché <code>.other_user</code>, qui contient un texte biographique sur Slade Wilson. En remontant d'un niveau dans l'arborescence FTP (<code>cd ..</code>), on aperçoit également un répertoire <code>slade</code>. Les deux éléments se rejoignent : un autre utilisateur du système s'appelle bien slade, un nom qu'on note pour plus tard.</p>
+<p>On télécharge toutes les images :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mget<span class="w"> </span>*
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_FtldgqKEaa.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_FtldgqKEaa.png" /></a></p>
+<h3 id="etape-5-correction-de-limage-corrompue">Étape 5 : Correction de l'image corrompue<a class="headerlink" href="#etape-5-correction-de-limage-corrompue" title="Permanent link">&para;</a></h3>
+<p>On ouvre les trois images téléchargées. <code>aa.jpg</code> et <code>Queen's_Gambit.png</code> s'affichent normalement, mais <code>Leave_me_alone.png</code> refuse de s'ouvrir. Quand une image ne s'ouvre pas malgré une extension correcte, la cause la plus probable est des magic bytes altérés. On l'examine avec un éditeur hexadécimal :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>hexeditor<span class="w"> </span>Leave_me_alone.png
+</span></code></pre></div>
+<p>Les octets en début de fichier ne correspondent pas à la signature PNG attendue. On les corrige directement dans l'éditeur hex :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>89 50 4E 47 0D 0A 1A 0A
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_MPPke8F7Jx.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_MPPke8F7Jx.png" /></a></p>
+<div class="admonition info">
+<p class="admonition-title">Qu'est-ce que les magic bytes ?</p>
+<p>Chaque format de fichier commence par une séquence d'octets spécifique qui permet aux programmes de l'identifier indépendamment de son extension. Pour un PNG, cette signature est <code>89 50 4E 47 0D 0A 1A 0A</code>. Si ces octets sont corrompus ou remplacés, l'image ne s'ouvrira pas malgré son extension <code>.png</code>. C'est une technique courante en CTF pour "cacher" un fichier en altérant son en-tête.</p>
+</div>
+<p>On ouvre l'image réparée :</p>
+<p><a href="../screen/LianYu/SnippingTool_4U2rgjPSki.png"><img alt="Lian_Yu" src="../screen/LianYu/SnippingTool_4U2rgjPSki.png" /></a></p>
+<p>L'image affiche un mot de passe : <strong>password</strong>.</p>
+<h3 id="etape-6-extraction-steganographique">Étape 6 : Extraction stéganographique<a class="headerlink" href="#etape-6-extraction-steganographique" title="Permanent link">&para;</a></h3>
+<p>On a maintenant un mot de passe (<code>password</code>) sans contexte apparent. En CTF, quand on trouve un mot de passe accompagné d'images, le réflexe est de tester la stéganographie : des données peuvent être dissimulées à l'intérieur d'une image sans altérer son apparence visuelle. L'outil <code>steghide</code> est le standard pour ce type d'extraction.</p>
+<p><code>Leave_me_alone.png</code> contenait déjà l'information utile. <code>Queen's_Gambit.png</code> n'est qu'une image de mise en scène. Le candidat naturel est donc <code>aa.jpg</code>. On tente l'extraction avec le mot de passe trouvé :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>steghide<span class="w"> </span>extract<span class="w"> </span>-sf<span class="w"> </span>aa.jpg
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_BgYDRgPu3j.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_BgYDRgPu3j.png" /></a></p>
+<p>Steghide extrait une archive <code>ss.zip</code>. On la décompresse :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>unzip<span class="w"> </span>ss.zip
+</span></code></pre></div>
+<p>Cela produit deux fichiers : <code>passwd.txt</code> et <code>shado</code>. <code>passwd.txt</code> contient du texte de mise en scène sans credentials utilisables. C'est <code>shado</code> qui contient ce qu'on cherche :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>cat<span class="w"> </span>shado
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_rRBuXlPUf0.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_rRBuXlPUf0.png" /></a></p>
+<p>On obtient un mot de passe : <strong>M3tahuman</strong>. Le port 22 (SSH) était ouvert d'après le scan Nmap de l'étape 1, et FTP ne permet pas d'obtenir un shell sur la machine. SSH est donc le service logique à tester avec ce nouveau mot de passe.</p>
+<p>Le nom d'utilisateur associé est <code>slade</code>, repéré dans l'arborescence FTP à l'étape 4.</p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>what is the file name with SSH password?</strong> → <code>shado</code></p>
+</div>
+<h3 id="etape-7-connexion-ssh-et-flag-utilisateur">Étape 7 : Connexion SSH et flag utilisateur<a class="headerlink" href="#etape-7-connexion-ssh-et-flag-utilisateur" title="Permanent link">&para;</a></h3>
+<p>On se connecte donc avec les credentials récupérés :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ssh<span class="w"> </span>slade@&lt;IP_cible&gt;
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1"># Password: M3tahuman</span>
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_hkUUiBnDtP.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_hkUUiBnDtP.png" /></a></p>
+<p>La connexion réussit. On lit le flag utilisateur :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>cat<span class="w"> </span>/home/slade/user.txt
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_u2xIAGMngo.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_u2xIAGMngo.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>User flag</strong> → <code>THM{P30P7E_K33P_53CRET5__C0MPUT3R5_D0N'T}</code></p>
+</div>
+<h3 id="etape-8-escalade-de-privileges-via-sudo-pkexec">Étape 8 : Escalade de privilèges via sudo pkexec<a class="headerlink" href="#etape-8-escalade-de-privileges-via-sudo-pkexec" title="Permanent link">&para;</a></h3>
+<p>La première chose à vérifier après un accès SSH est les droits sudo de l'utilisateur courant. La commande <code>sudo -l</code> liste ce que slade peut exécuter avec les droits root :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>-l
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_u29T0PD40o.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_u29T0PD40o.png" /></a></p>
+<p>slade peut exécuter <code>/usr/bin/pkexec</code> en tant que root. On consulte GTFOBins pour confirmer la méthode d'exploitation :</p>
+<p><a href="../screen/LianYu/brave_hKU7gi7hFz.png"><img alt="Lian_Yu" src="../screen/LianYu/brave_hKU7gi7hFz.png" /></a></p>
+<div class="admonition info">
+<p class="admonition-title">Qu'est-ce que pkexec ?</p>
+<p><code>pkexec</code> est un utilitaire de la suite PolicyKit qui permet d'exécuter des commandes avec les droits d'un autre utilisateur, de façon similaire à <code>sudo</code>. GTFOBins confirme que lorsqu'il figure dans la liste sudo, on peut l'utiliser pour obtenir un shell root. Le mot de passe demandé est celui de slade (<code>M3tahuman</code>).</p>
+</div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>pkexec<span class="w"> </span>/bin/bash
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_Z6pb3QFhlx.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_Z6pb3QFhlx.png" /></a></p>
+<p>On est maintenant root. On lit le flag final :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>cat<span class="w"> </span>/root/root.txt
+</span></code></pre></div>
+<p><a href="../screen/LianYu/WindowsTerminal_c8fw1QCKug.png"><img alt="Lian_Yu" src="../screen/LianYu/WindowsTerminal_c8fw1QCKug.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Root flag</strong> → <code>THM{MY_W0RD_I5_MY_B0ND_IF_I_ACC3PT_YOUR_CONTRACT_THEN_IT_WILL_BE_COMPL3TED_OR_I'LL_BE_D34D}</code></p>
+</div>
+<h2 id="synthese-technique">Synthèse technique<a class="headerlink" href="#synthese-technique" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Détails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vulnérabilités identifiées</strong></td>
+<td>Nom d'utilisateur caché en CSS, credentials en Base58 dans un fichier ticket public, FTP accessible avec ces credentials, stéganographie exposant des credentials SSH, sudo pkexec exploitable via GTFOBins</td>
+</tr>
+<tr>
+<td><strong>Techniques utilisées</strong></td>
+<td>Enumération web multi-niveaux, décodage Base58, correction de magic bytes, extraction steghide, GTFOBins pkexec</td>
+</tr>
+<tr>
+<td><strong>Outils employés</strong></td>
+<td>Nmap, Gobuster, FTP, hexeditor, steghide, SSH, dcode.fr</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition abstract">
+<p class="admonition-title">Ce qu'il faut retenir</p>
+<ol>
+<li>L'énumération web doit être exhaustive et multi-niveaux : un répertoire peut en cacher un autre, qui cache lui-même un fichier avec une extension non standard.</li>
+<li>Le texte invisible par CSS est visible dans le code source : c'est une fausse protection courante en CTF et un vrai risque en production.</li>
+<li>Les images peuvent contenir des données cachées par stéganographie, indétectables visuellement - steghide est l'outil de référence.</li>
+<li>Vérifier les magic bytes quand un fichier refuse de s'ouvrir malgré une extension correcte.</li>
+<li>Tout binaire dans la liste sudo doit être vérifié sur GTFOBins : pkexec permet une élévation triviale.</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 · Managone · <a href="https://odonia.fr" target="_blank" rel="noopener">Odonia Cyber</a>, cybersécurité pour les PME et ETI
+
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/mathisg/" target="_blank" rel="noopener" title="Mathis · LinkedIn (fondateur Odonia Cyber)" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/managone/writeups" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://odonia.fr" target="_blank" rel="noopener" title="Odonia Cyber · mon cabinet de cybersécurité pour les PME et ETI" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 6c1.4 0 2.8 1.1 2.8 2.5V11c.6 0 1.2.6 1.2 1.3v3.5c0 .6-.6 1.2-1.3 1.2H9.2c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.6.6-1.2 1.2-1.2V9.5C9.2 8.1 10.6 7 12 7m0 1.2c-.8 0-1.5.5-1.5 1.3V11h3V9.5c0-.8-.7-1.3-1.5-1.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/clipboard-fix.js"></script>
+      
+    
+  </body>
+</html>

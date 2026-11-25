@@ -1,0 +1,2147 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Collection de writeups TryHackMe, HackTheBox et autres CTF">
+      
+      
+        <meta name="author" content="Managone">
+      
+      
+        <link rel="canonical" href="https://managone.github.io/writeups/tryhackme/crack-the-hash/">
+      
+      
+        <link rel="prev" href="../agent-sudo/">
+      
+      
+        <link rel="next" href="../lazyadmin/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_perso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>Crack the hash - Writeups Cyber en Français</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#crack-the-hash-tryhackme" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Writeups Cyber en Français" class="md-header__button md-logo" aria-label="Writeups Cyber en Français" data-md-component="logo">
+      
+  <img src="../../assets/logo_perso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Writeups Cyber en Français
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Crack the hash
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/managone/writeups" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    managone/writeups
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  TryHackMe
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hackthebox/" class="md-tabs__link">
+          
+  
+  
+  HackTheBox
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Writeups Cyber en Français" class="md-nav__button md-logo" aria-label="Writeups Cyber en Français" data-md-component="logo">
+      
+  <img src="../../assets/logo_perso.png" alt="logo">
+
+    </a>
+    Writeups Cyber en Français
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/managone/writeups" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    managone/writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHackMe
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    TryHackMe
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHackMe Writeups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rootme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RootMe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simplectf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simple CTF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ohsint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OhSINT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../picklerick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pickle Rick
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basicpentesting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Pentesting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bountyhacker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bounty Hacker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-sudo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Sudo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crack the hash
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crack the hash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#informations-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Informations générales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexte-et-objectifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexte et objectifs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methodologie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodologie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Méthodologie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-identifier-le-type-de-hachage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : Identifier le type de hachage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-utiliser-des-outils-en-ligne-pour-les-hachages-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : Utiliser des outils en ligne pour les hachages courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-repeter-lidentification-et-le-test-pour-dautres-algorithmes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : Répéter l’identification et le test pour d’autres algorithmes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-utiliser-hashcat-pour-les-hachages-non-trouves-en-ligne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 : Utiliser hashcat pour les hachages non trouvés en ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-5-gerer-les-hachages-sales-ou-complexes-bcrypt-sha512-crypt-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 5 : Gérer les hachages salés ou complexes (bcrypt, SHA512 crypt, etc.)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-6-craquer-un-hash-md4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 : Craquer un hash MD4
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#niveau-2-hachages-avances-et-sales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Niveau 2 : Hachages avancés et salés
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Niveau 2 : Hachages avancés et salés">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-7-craquer-un-hash-sha256-non-trouve-en-ligne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 7 : Craquer un hash SHA256 non trouvé en ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-8-identifier-et-attaquer-un-hash-ntlm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 8 : Identifier et attaquer un hash NTLM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-9-craquer-un-hash-sha512-crypt-format-unix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 9 : Craquer un hash SHA512 crypt (format Unix)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-10-craquer-un-hash-hmac-sha1-sale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 10 : Craquer un hash HMAC-SHA1 salé
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synthese-technique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synthèse technique
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lazyadmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LazyAdmin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overpass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overpass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../brooklyn-nine-nine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brooklyn Nine Nine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cyborg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyborg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skynet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skynet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anonymous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anonymous
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ignite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ignite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vulnerability-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vulnerability Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../net-sec-challenge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Net Sec Challenge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wgel-ctf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wgel CTF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tomghost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tomghost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../brute-it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brute It
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anthem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anthem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lian-yu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lian Yu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../year-of-the-rabbit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Year of the Rabbit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chill-hack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chill Hack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamingserver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GamingServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HackTheBox
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HackTheBox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackthebox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HackTheBox Writeups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#informations-generales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Informations générales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexte-et-objectifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexte et objectifs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methodologie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthodologie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Méthodologie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-identifier-le-type-de-hachage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : Identifier le type de hachage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-utiliser-des-outils-en-ligne-pour-les-hachages-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : Utiliser des outils en ligne pour les hachages courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-repeter-lidentification-et-le-test-pour-dautres-algorithmes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : Répéter l’identification et le test pour d’autres algorithmes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-utiliser-hashcat-pour-les-hachages-non-trouves-en-ligne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 : Utiliser hashcat pour les hachages non trouvés en ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-5-gerer-les-hachages-sales-ou-complexes-bcrypt-sha512-crypt-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 5 : Gérer les hachages salés ou complexes (bcrypt, SHA512 crypt, etc.)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-6-craquer-un-hash-md4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 : Craquer un hash MD4
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#niveau-2-hachages-avances-et-sales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Niveau 2 : Hachages avancés et salés
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Niveau 2 : Hachages avancés et salés">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-7-craquer-un-hash-sha256-non-trouve-en-ligne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 7 : Craquer un hash SHA256 non trouvé en ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-8-identifier-et-attaquer-un-hash-ntlm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 8 : Identifier et attaquer un hash NTLM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-9-craquer-un-hash-sha512-crypt-format-unix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 9 : Craquer un hash SHA512 crypt (format Unix)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-10-craquer-un-hash-hmac-sha1-sale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 10 : Craquer un hash HMAC-SHA1 salé
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synthese-technique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synthèse technique
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:crypto" class="md-tag">Crypto</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:facile" class="md-tag">Facile</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:hashcat" class="md-tag">Hashcat</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:john" class="md-tag">John</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:tryhackme" class="md-tag">TryHackMe</a>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<h1 id="crack-the-hash-tryhackme">Crack the Hash - TryHackMe<a class="headerlink" href="#crack-the-hash-tryhackme" title="Permanent link">&para;</a></h1>
+<figure>
+<p><img alt="crackthehash" src="../logo/crackthehash.png" width="250" /></p>
+</figure>
+<h2 id="informations-generales">Informations générales<a class="headerlink" href="#informations-generales" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Plateforme</strong></td>
+<td>TryHackMe</td>
+</tr>
+<tr>
+<td><strong>Type</strong></td>
+<td>Offensive ou Defensive / Challenge</td>
+</tr>
+<tr>
+<td><strong>Difficulté</strong></td>
+<td>Facile</td>
+</tr>
+<tr>
+<td><strong>Thématiques</strong></td>
+<td>Hash, brute force, wordlists</td>
+</tr>
+<tr>
+<td><strong>Prérequis</strong></td>
+<td>Bases sur les algorithmes de hachage, utilisation de hashcat/John, manipulation de wordlists</td>
+</tr>
+</tbody>
+</table>
+<h2 id="contexte-et-objectifs">Contexte et objectifs<a class="headerlink" href="#contexte-et-objectifs" title="Permanent link">&para;</a></h2>
+<p>Dans cette room, l'objectif est de retrouver les mots de passe à partir de différents types de hachages. Les challenges sont divisés en deux niveaux : le premier se concentre sur des algorithmes classiques et des outils en ligne, tandis que le second introduit des hachages plus complexes, parfois salés, nécessitant des outils spécialisés comme hashcat ou John the Ripper.</p>
+<div class="admonition info">
+<p class="admonition-title">À propos de cette room</p>
+<p>Cette room permet de se familiariser avec l'identification des algorithmes de hachage, l'utilisation de wordlists, et les techniques de brute force. C'est une excellente introduction à la cryptanalyse appliquée et à la sécurité des mots de passe.</p>
+</div>
+<h2 id="methodologie">Méthodologie<a class="headerlink" href="#methodologie" title="Permanent link">&para;</a></h2>
+<h3 id="etape-1-identifier-le-type-de-hachage">Étape 1 : Identifier le type de hachage<a class="headerlink" href="#etape-1-identifier-le-type-de-hachage" title="Permanent link">&para;</a></h3>
+<p>Avant de tenter de "craquer" un hash, il faut savoir de quel algorithme il s'agit. La longueur et le format du hash donnent souvent des indices. Pour automatiser cette étape, on peut utiliser des outils comme <code>hashid</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>hashid<span class="w"> </span>48bb6e862e54f2a795ffc4e541caed4d
+</span></code></pre></div>
+<p><a href="../screen/crackthehash/WindowsTerminal_kzjOKiLipP.png"><img alt="crackthehash" src="../screen/crackthehash/WindowsTerminal_kzjOKiLipP.png" /></a></p>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi cette commande ?</p>
+<p>Identifier l’algorithme permet de choisir le bon mode dans hashcat ou John, et d’éviter de perdre du temps sur de mauvaises pistes.</p>
+</div>
+<p>Pour le hash <code>48bb6e862e54f2a795ffc4e541caed4d</code>, l’outil indique qu’il s’agit probablement d’un hash MD5.</p>
+<h3 id="etape-2-utiliser-des-outils-en-ligne-pour-les-hachages-courants">Étape 2 : Utiliser des outils en ligne pour les hachages courants<a class="headerlink" href="#etape-2-utiliser-des-outils-en-ligne-pour-les-hachages-courants" title="Permanent link">&para;</a></h3>
+<p>Quand le hash n’est pas salé et utilise un algorithme classique (MD5, SHA1, SHA256…), il est souvent possible de le retrouver dans des bases de données publiques.</p>
+<p>On peut tester sur des sites comme CrackStation ou dcode.fr :</p>
+<ul>
+<li>https://crackstation.net/</li>
+<li>https://www.dcode.fr/cipher-identifier</li>
+</ul>
+<p>Après avoir collé le hash MD5, on obtient le mot de passe original.</p>
+<p><a href="../screen/crackthehash/2eQn5fI601.png"><img alt="crackthehash" src="../screen/crackthehash/2eQn5fI601.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Hash : 48bb6e862e54f2a795ffc4e541caed4d</strong> → <code>easy</code></p>
+</div>
+<h3 id="etape-3-repeter-lidentification-et-le-test-pour-dautres-algorithmes">Étape 3 : Répéter l’identification et le test pour d’autres algorithmes<a class="headerlink" href="#etape-3-repeter-lidentification-et-le-test-pour-dautres-algorithmes" title="Permanent link">&para;</a></h3>
+<p>Pour le hash suivant, <code>CBFDAC6008F9CAB4083784CBD1874F76618D2A97</code>, la longueur (40 caractères hexadécimaux) suggère SHA1.</p>
+<p>On vérifie avec hashid :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>hashid<span class="w"> </span>CBFDAC6008F9CAB4083784CBD1874F76618D2A97
+</span></code></pre></div>
+<p><a href="../screen/crackthehash/WindowsTerminal_vNdeEBTQlk.png"><img alt="crackthehash" src="../screen/crackthehash/WindowsTerminal_vNdeEBTQlk.png" /></a></p>
+<p>Puis on teste sur CrackStation. Si le hash n’est pas trouvé, il faut passer à une attaque par dictionnaire.</p>
+<p><a href="../screen/crackthehash/Xe4x1owXFO.png"><img alt="crackthehash" src="../screen/crackthehash/Xe4x1owXFO.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Hash : CBFDAC6008F9CAB4083784CBD1874F76618D2A97</strong> → <code>password123</code></p>
+</div>
+<h3 id="etape-4-utiliser-hashcat-pour-les-hachages-non-trouves-en-ligne">Étape 4 : Utiliser hashcat pour les hachages non trouvés en ligne<a class="headerlink" href="#etape-4-utiliser-hashcat-pour-les-hachages-non-trouves-en-ligne" title="Permanent link">&para;</a></h3>
+<p>Quand les outils en ligne échouent, il faut cracker le hash localement avec une wordlist. Ici, on utilise hashcat, un outil de brute force très performant.</p>
+<div class="admonition info">
+<p class="admonition-title">Qu’est-ce que hashcat ?</p>
+<p>Hashcat est un outil de craquage de mots de passe qui exploite la puissance du processeur ou du GPU pour tester rapidement des millions de combinaisons.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Comment trouver le bon numéro de mode hashcat (-m) ?</p>
+<p>Une fois le type de hash identifié par hashid, il faut trouver le numéro de mode correspondant dans hashcat. La commande suivante liste tous les modes disponibles et permet de filtrer :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>hashcat<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"md5"</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>hashcat<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"sha256"</span>
+</span></code></pre></div>
+Les modes les plus courants à retenir :</p>
+<table>
+<thead>
+<tr>
+<th>Algorithme</th>
+<th>Mode hashcat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MD5</td>
+<td>0</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>100</td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td>1400</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>1700</td>
+</tr>
+<tr>
+<td>NTLM</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>bcrypt</td>
+<td>3200</td>
+</tr>
+<tr>
+<td>SHA-512crypt Unix</td>
+<td>1800</td>
+</tr>
+<tr>
+<td>HMAC-SHA1</td>
+<td>160</td>
+</tr>
+<tr>
+<td>MD4</td>
+<td>900</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Pour un hash SHA256 (64 caractères hexadécimaux), on utilise la commande suivante :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032"</span><span class="w"> </span>&gt;<span class="w"> </span>hash.txt
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">1400</span><span class="w"> </span>hash.txt<span class="w"> </span>/usr/share/wordlists/rockyou.txt
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Comment utiliser hashcat ?</p>
+<p>La syntaxe de base est <code>hashcat -m &lt;mode&gt; &lt;fichier_hash&gt; &lt;wordlist&gt;</code> :</p>
+<ul>
+<li><code>-m 1400</code> : le mode hashcat correspondant à l'algorithme (ici SHA256, voir le tableau ci-dessus)</li>
+<li><code>hash.txt</code> : le fichier contenant le hash à craquer</li>
+<li><code>/usr/share/wordlists/rockyou.txt</code> : la wordlist testée mot par mot contre le hash</li>
+</ul>
+</div>
+<p><a href="../screen/crackthehash/2TOA9i6X0k.png"><img alt="crackthehash" src="../screen/crackthehash/2TOA9i6X0k.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Hash : 1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032</strong> → <code>letmein</code></p>
+</div>
+<h3 id="etape-5-gerer-les-hachages-sales-ou-complexes-bcrypt-sha512-crypt-etc">Étape 5 : Gérer les hachages salés ou complexes (bcrypt, SHA512 crypt, etc.)<a class="headerlink" href="#etape-5-gerer-les-hachages-sales-ou-complexes-bcrypt-sha512-crypt-etc" title="Permanent link">&para;</a></h3>
+<p>Certains hachages affichent un format particulier, par exemple <code>$2y$12$...</code> pour bcrypt ou <code>$6$...</code> pour SHA512 crypt. Ces formats incluent des informations sur l’algorithme, le coût (nombre d’itérations) et parfois le sel.</p>
+<div class="admonition info">
+<p class="admonition-title">Qu’est-ce qu’un sel ?</p>
+<p>Un sel est une valeur aléatoire ajoutée au mot de passe avant le hachage. Il garantit que deux mots de passe identiques produisent des hashs différents, ce qui empêche notamment l’utilisation de tables précalculées (rainbow tables) pour retrouver le mot de passe d’origine.</p>
+</div>
+<p>Pour bcrypt :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'$2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX1H68wsRom'</span><span class="w"> </span>&gt;<span class="w"> </span>bcrypt.hash
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">3200</span><span class="w"> </span>bcrypt.hash<span class="w"> </span>/usr/share/wordlists/rockyou.txt
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Pourquoi filtrer la wordlist ?</p>
+<p>La room TryHackMe précise que le mot de passe attendu fait 4 caractères. Avec cette information, il est judicieux de filtrer la wordlist pour accélérer le craquage :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>grep<span class="w"> </span>-x<span class="w"> </span><span class="s1">'.\{4\}'</span><span class="w"> </span>/usr/share/wordlists/rockyou.txt<span class="w"> </span>&gt;<span class="w"> </span>rockyou-4.txt
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">3200</span><span class="w"> </span>bcrypt.hash<span class="w"> </span>rockyou-4.txt
+</span></code></pre></div></p>
+</div>
+<p><a href="../screen/crackthehash/VzQ1Cr6Vru.png"><img alt="crackthehash" src="../screen/crackthehash/VzQ1Cr6Vru.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Hash : $2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX1H68wsRom</strong> → <code>bleh</code></p>
+</div>
+<h3 id="etape-6-craquer-un-hash-md4">Étape 6 : Craquer un hash MD4<a class="headerlink" href="#etape-6-craquer-un-hash-md4" title="Permanent link">&para;</a></h3>
+<p>Pour le hash <code>279412f945939ba78ce0758d3fd83daa</code>, hashid indique MD4. On peut tester en ligne encore une fois avec Crackstation :</p>
+<p><a href="../screen/crackthehash/CCx6fRjo48.png"><img alt="crackthehash" src="../screen/crackthehash/CCx6fRjo48.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Hash : 279412f945939ba78ce0758d3fd83daa</strong> → <code>Eternity22</code></p>
+</div>
+<hr />
+<h2 id="niveau-2-hachages-avances-et-sales">Niveau 2 : Hachages avancés et salés<a class="headerlink" href="#niveau-2-hachages-avances-et-sales" title="Permanent link">&para;</a></h2>
+<h3 id="etape-7-craquer-un-hash-sha256-non-trouve-en-ligne">Étape 7 : Craquer un hash SHA256 non trouvé en ligne<a class="headerlink" href="#etape-7-craquer-un-hash-sha256-non-trouve-en-ligne" title="Permanent link">&para;</a></h3>
+<p>Pour le hash <code>F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85</code>, les outils en ligne échouent. On utilise hashcat avec le bon mode :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85"</span><span class="w"> </span>&gt;<span class="w"> </span>sha256.hash
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">1400</span><span class="w"> </span>sha256.hash<span class="w"> </span>/usr/share/wordlists/rockyou.txt
+</span></code></pre></div>
+<p><a href="../screen/crackthehash/5WlSIZ9BP6.png"><img alt="crackthehash" src="../screen/crackthehash/5WlSIZ9BP6.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Hash : F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85</strong> → <code>paule</code></p>
+</div>
+<h3 id="etape-8-identifier-et-attaquer-un-hash-ntlm">Étape 8 : Identifier et attaquer un hash NTLM<a class="headerlink" href="#etape-8-identifier-et-attaquer-un-hash-ntlm" title="Permanent link">&para;</a></h3>
+<p>Le hash <code>1DFECA0C002AE40B8619ECF94819CC1B</code> ne correspond ni à MD5 ni à SHA1. Après vérification, il s’agit d’un hash NTLM (utilisé par Windows). On utilise hashcat avec le mode 1000 :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"1DFECA0C002AE40B8619ECF94819CC1B"</span><span class="w"> </span>&gt;<span class="w"> </span>ntlm.hash
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">1000</span><span class="w"> </span>ntlm.hash<span class="w"> </span>/usr/share/wordlists/rockyou.txt
+</span></code></pre></div>
+<p><a href="../screen/crackthehash/oQ2bvXsGp8.png"><img alt="crackthehash" src="../screen/crackthehash/oQ2bvXsGp8.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Hash : 1DFECA0C002AE40B8619ECF94819CC1B</strong> → <code>n63umy8lkf4i</code></p>
+</div>
+<h3 id="etape-9-craquer-un-hash-sha512-crypt-format-unix">Étape 9 : Craquer un hash SHA512 crypt (format Unix)<a class="headerlink" href="#etape-9-craquer-un-hash-sha512-crypt-format-unix" title="Permanent link">&para;</a></h3>
+<p>Le hash <code>$6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.</code> indique un hash SHA512 crypté avec le sel <code>aReallyHardSalt</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Le sel est déjà intégré dans le hash</p>
+<p>Pour les formats Unix comme <code>$6$...</code> (SHA512crypt) ou <code>$2y$...</code> (bcrypt), le sel est <strong>directement inclus dans la chaîne du hash</strong> entre les <code>$</code>. Il n'y a donc rien de spécial à faire : on met le hash complet dans le fichier et hashcat extrait le sel automatiquement.</p>
+</div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'$6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.'</span><span class="w"> </span>&gt;<span class="w"> </span>sha512crypt.hash
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">1800</span><span class="w"> </span>sha512crypt.hash<span class="w"> </span>/usr/share/wordlists/rockyou.txt
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Optimiser la wordlist</p>
+<p>Si le mot de passe attendu fait 6 caractères, filtrer la wordlist :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>grep<span class="w"> </span>-x<span class="w"> </span><span class="s1">'.\{6\}'</span><span class="w"> </span>/usr/share/wordlists/rockyou.txt<span class="w"> </span>&gt;<span class="w"> </span>rockyou-6.txt
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">1800</span><span class="w"> </span>sha512crypt.hash<span class="w"> </span>rockyou-6.txt
+</span></code></pre></div></p>
+</div>
+<p><a href="../screen/crackthehash/fOxm31QUWC.png"><img alt="crackthehash" src="../screen/crackthehash/fOxm31QUWC.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Hash : $6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.</strong> → <code>waka99</code></p>
+</div>
+<h3 id="etape-10-craquer-un-hash-hmac-sha1-sale">Étape 10 : Craquer un hash HMAC-SHA1 salé<a class="headerlink" href="#etape-10-craquer-un-hash-hmac-sha1-sale" title="Permanent link">&para;</a></h3>
+<p>Le hash <code>e5d8870e5bdd26602cab8dbe07a942c8669e56d6</code> est accompagné du sel <code>tryhackme</code>. Ici, il s’agit d’un HMAC-SHA1 (un hash SHA1 utilisant une clé, ici le sel).</p>
+<div class="admonition info">
+<p class="admonition-title">Comment ajouter le sel pour hashcat</p>
+<p>Contrairement au SHA512crypt, le sel n’est pas intégré dans le hash. Il faut le fournir manuellement en l’ajoutant après le hash, séparé par <code>:</code> dans le fichier :
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>&lt;hash&gt;:&lt;sel&gt;
+</span></code></pre></div>
+Hashcat reconnaît ce format et utilise automatiquement le sel lors du calcul.</p>
+</div>
+<p>Hashcat peut gérer ce format avec le mode 160 :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"e5d8870e5bdd26602cab8dbe07a942c8669e56d6:tryhackme"</span><span class="w"> </span>&gt;<span class="w"> </span>hmacsha1.hash
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">160</span><span class="w"> </span>hmacsha1.hash<span class="w"> </span>/usr/share/wordlists/rockyou.txt
+</span></code></pre></div>
+<p><a href="../screen/crackthehash/WindowsTerminal_JKzZBajTtM.png"><img alt="crackthehash" src="../screen/crackthehash/WindowsTerminal_JKzZBajTtM.png" /></a></p>
+<p><a href="../screen/crackthehash/N86CZjkIgc.png"><img alt="crackthehash" src="../screen/crackthehash/N86CZjkIgc.png" /></a></p>
+<div class="admonition success">
+<p class="admonition-title">Réponse</p>
+<p><strong>Hash : e5d8870e5bdd26602cab8dbe07a942c8669e56d6 (salt: tryhackme)</strong> → <code>481616481616</code></p>
+</div>
+<hr />
+<h2 id="synthese-technique">Synthèse technique<a class="headerlink" href="#synthese-technique" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Détails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vulnérabilités identifiées</strong></td>
+<td>Utilisation de hachages faibles (MD5, SHA1, NTLM), absence de sel, mots de passe faibles</td>
+</tr>
+<tr>
+<td><strong>Techniques utilisées</strong></td>
+<td>Identification d’algorithme, attaque par dictionnaire, filtrage de wordlist, script HMAC</td>
+</tr>
+<tr>
+<td><strong>Outils employés</strong></td>
+<td>hashid, hashcat, CrackStation, dcode.fr</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition abstract">
+<p class="admonition-title">Ce qu'il faut retenir</p>
+<ol>
+<li>Toujours identifier précisément le type de hash avant d’attaquer.</li>
+<li>Les outils en ligne suffisent pour les hachages classiques et non salés, mais hashcat/John sont indispensables pour les formats avancés.</li>
+<li>Adapter la wordlist et la méthode (filtrage, script) permet de gagner beaucoup de temps et d’efficacité.</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 · Managone · <a href="https://odonia.fr" target="_blank" rel="noopener">Odonia Cyber</a>, cybersécurité pour les PME et ETI
+
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/mathisg/" target="_blank" rel="noopener" title="Mathis · LinkedIn (fondateur Odonia Cyber)" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/managone/writeups" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://odonia.fr" target="_blank" rel="noopener" title="Odonia Cyber · mon cabinet de cybersécurité pour les PME et ETI" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 6c1.4 0 2.8 1.1 2.8 2.5V11c.6 0 1.2.6 1.2 1.3v3.5c0 .6-.6 1.2-1.3 1.2H9.2c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.6.6-1.2 1.2-1.2V9.5C9.2 8.1 10.6 7 12 7m0 1.2c-.8 0-1.5.5-1.5 1.3V11h3V9.5c0-.8-.7-1.3-1.5-1.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/clipboard-fix.js"></script>
+      
+    
+  </body>
+</html>
